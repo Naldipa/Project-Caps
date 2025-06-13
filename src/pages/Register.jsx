@@ -91,15 +91,12 @@ export default function Register() {
 
       // 2. Simpan profil user ke tabel profiles
       if (authData.user) {
-        const { error: profileError } = await supabase
-          .from("profiles")
-          .insert({
-            id: authData.user.id,
-            full_name: formData.name,
-            email: formData.email,
-            created_at: new Date().toISOString(),
-          })
-          
+        const { error: profileError } = await supabase.from("profiles").insert({
+          id: authData.user.id,
+          full_name: formData.name,
+          email: formData.email,
+          created_at: new Date().toISOString(),
+        });
 
         if (profileError) {
           console.error("Profile Error Details:", profileError);
